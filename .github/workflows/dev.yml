@@ -20,7 +20,7 @@ jobs:
 
     steps:
       - name: Second Job
-        run: echo "Error: First job failed!"
+        run: echo "Error First job failed!"
 
   send-notification:
     runs-on: ubuntu-latest
