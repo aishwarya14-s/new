@@ -31,4 +31,5 @@ jobs:
 
     steps:
       - name: Send Slack notification
-        # Add the necessary steps to send a Slack notification
+        run: echo "always runs!"
+
