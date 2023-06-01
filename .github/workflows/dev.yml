@@ -2,8 +2,8 @@ name: Deploy main
 on:
   workflow_dispatch:
 jobs:
-  slack_notification_start:
-    name: Slack Notification1
+  start_notification:
+    name: Start Notification
     runs-on: ubuntu-latest
     steps:
       - name: Slack Notification
@@ -30,7 +30,7 @@ jobs:
         with:
           node-version: "16.14.2"
       - name: Install Serverless Framework
-        run: n install -g serverless
+        run: npm install -g serverless
 #       - name: Configuring AWS credentials using role based access
 #         uses: aws-actions/configure-aws-credentials@v1
 #         with:
@@ -43,28 +43,27 @@ jobs:
 #         run: sh ./scripts/getEnvVars.sh us-east-1 development
 #       - name: Deploy
 #         run: sls deploy -s dev --region us-east-1
-  slack_notification_end:
-    name: Slack Notification
+  success_notification:
+    name: Success Notification
+    needs:
+      - deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Success Notification
+        run: echo "SUCCESS."
+  failure_notification:
+    name: Failure Notification 
     needs:
       - deploy
     runs-on: ubuntu-latest
     if: ${{failure()}}
     steps:
-      - name: Slack Notification
-        run: echo " DEPLOY FAILED."
-  slack_notification_end1:
-    name: Slack Notification 2
+      - name: Failure Notification
+        run: echo "FAILED."
+  completed_notification:
+    name: Complete Notification
     needs:
-      - slack_notification_start
-    runs-on: ubuntu-latest
-    if: ${{failure()}}
-    steps:
-      - name: Slack Notification
-        run: echo "INITIAL NOTIFICATION FAILED."
-  slack_notification_SUCCESS:
-    name: Slack Notification2
-    needs:
-      - slack_notification_start
+      - start_notification
       - deploy
     runs-on: ubuntu-latest
     steps:
