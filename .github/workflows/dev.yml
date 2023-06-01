@@ -1,67 +1,40 @@
-name: Deploy Master
+name: Hello World
+
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
-  slack_notification_start:
-    name: Slack Notification
+  build:
+    name: Build
     runs-on: ubuntu-latest
+
     steps:
-      - name: Slack Notification
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Print Hello World
+        run: echo "Hello, World!"
+
+      - name: Slack Notification - Success
+        if: success()
         uses: rtCamp/action-slack-notify@v2
         env:
-          SLACK_COLOR: ${{ job.status }}
+          SLACK_COLOR: good
           SLACK_ICON: https://github.com/rtCamp.png?size=48
-          SLACK_MESSAGE: "Starting cron serverless deploy :rocket:"
-          SLACK_TITLE: Deploy dev
+          SLACK_MESSAGE: "Hello World job succeeded :white_check_mark:"
+          SLACK_TITLE: Hello World - Success
           SLACK_USERNAME: github
           SLACK_WEBHOOK: https://hooks.slack.com/services/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
-  deploy:
-    name: Serverless Deploy
-    needs:
-      - slack_notification_start
-    runs-on: ubuntu-latest
-    permissions:
-      id-token: write
-      contents: read
-    steps:
-      - uses: actions/checkout@master
-        with:
-          ref: master
-      - uses: actions/setup-node@master
-        with:
-          node-version: "16.14.2"
-      - name: Install Serverless Framework
-        run: npm install -g serverless
-      - name: Configuring AWS credentials using role based access
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          role-to-assume: arn:aws:iam::378176467373:role/github-action-iam-role
-          role-duration-seconds: 1200
-          aws-region: us-east-1
-      - name: Install dependencies
-        run: npm install --force
-      - name: Creating .env file
-        run: sh ./scripts/getEnvVars.sh us-east-1 development
-      - name: Deploy
-        run: sls deploy -s dev --region us-east-1
 
-  slack_notification_end:
-    name: Slack Notification
-    needs:
-      - slack_notification_start
-      - deploy
-    runs-on: ubuntu-latest
-    steps:
-      - name: Slack Notification
+      - name: Slack Notification - Failure
         if: failure()
         uses: rtCamp/action-slack-notify@v2
         env:
-          SLACK_COLOR: ${{ job.status }}
+          SLACK_COLOR: danger
           SLACK_ICON: https://github.com/rtCamp.png?size=48
-          SLACK_MESSAGE: "Failed to deploy cron serverless :x:"
-          SLACK_TITLE: Deploy dev
+          SLACK_MESSAGE: "Hello World job failed :x:"
+          SLACK_TITLE: Hello World - Failure
           SLACK_USERNAME: github
           SLACK_WEBHOOK: https://hooks.slack.com/services/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
