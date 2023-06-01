@@ -40,7 +40,7 @@ jobs:
 #           role-duration-seconds: 1200
 #           aws-region: us-east-1
       - name: Install dependencies
-        run: npm install --force
+        run: npm init --y
 #       - name: Creating .env file
 #         run: sh ./scripts/getEnvVars.sh us-east-1 development
 #       - name: Deploy
