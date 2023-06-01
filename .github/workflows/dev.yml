@@ -7,14 +7,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Slack Notification
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_COLOR: ${{ job.status }}
-          SLACK_ICON: https://github.com/rtCamp.png?size=48
-          SLACK_MESSAGE: "Starting cron serverless deploy :rocket:"
-          SLACK_TITLE: Deploy dev
-          SLACK_USERNAME: github
-          SLACK_WEBHOOK: https://hooks.slack.com/services/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
+        run: echo "STARTED."
+#         uses: rtCamp/action-slack-notify@v2
+#         env:
+#           SLACK_COLOR: ${{ job.status }}
+#           SLACK_ICON: https://github.com/rtCamp.png?size=48
+#           SLACK_MESSAGE: "Starting cron serverless deploy :rocket:"
+#           SLACK_TITLE: Deploy dev
+#           SLACK_USERNAME: github
+#           SLACK_WEBHOOK: https://hooks.slack.com/services/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
   deploy:
     name: Serverless Deploy
     needs:
@@ -52,11 +53,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Slack Notification
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_COLOR: ${{ job.status }}
-          SLACK_ICON: https://github.com/rtCamp.png?size=48
-          SLACK_MESSAGE: "Successfully deployed cron serverless :white_check_mark:"
-          SLACK_TITLE: Deploy dev
-          SLACK_USERNAME: github
-          SLACK_WEBHOOK: https://hooks.slack.com/services/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
+        run: echo "COMPLETED."
+#         uses: rtCamp/action-slack-notify@v2
+#         env:
+#           SLACK_COLOR: ${{ job.status }}
+#           SLACK_ICON: https://github.com/rtCamp.png?size=48
+#           SLACK_MESSAGE: "Successfully deployed cron serverless :white_check_mark:"
+#           SLACK_TITLE: Deploy dev
+#           SLACK_USERNAME: github
+#           SLACK_WEBHOOK: https://hooks.slack.com/services/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
