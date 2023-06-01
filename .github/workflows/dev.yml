@@ -61,7 +61,7 @@ jobs:
       - slack_notification_start
       - deploy
     runs-on: ubuntu-latest
-#     if: ${{ failure() }}
+    if: ${{ failure() }}
     steps:
       - name: Slack Notification
         run: echo "COMPLETED."
