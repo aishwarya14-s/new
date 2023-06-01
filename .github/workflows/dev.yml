@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Slack Notification
-        run: echo "STARTED."
+        run: eco "STARTED."
 #         uses: rtCamp/action-slack-notify@v2
 #         env:
 #           SLACK_COLOR: ${{ job.status }}
