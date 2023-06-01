@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - master
+
 jobs:
   slack_notification_start:
     name: Slack Notification
@@ -46,6 +47,7 @@ jobs:
         run: sh ./scripts/getEnvVars.sh us-east-1 development
       - name: Deploy
         run: sls deploy -s dev --region us-east-1
+
   slack_notification_end:
     name: Slack Notification
     needs:
@@ -54,11 +56,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Slack Notification
+        if: failure()
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_COLOR: ${{ job.status }}
           SLACK_ICON: https://github.com/rtCamp.png?size=48
-          SLACK_MESSAGE: "Successfully deployed cron serverless :white_check_mark:"
+          SLACK_MESSAGE: "Failed to deploy cron serverless :x:"
           SLACK_TITLE: Deploy dev
           SLACK_USERNAME: github
           SLACK_WEBHOOK: https://hooks.slack.com/services/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
