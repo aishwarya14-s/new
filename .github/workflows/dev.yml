@@ -1,6 +1,8 @@
 name: Deploy main
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
 jobs:
   start_notification:
     name: Start Notification
