@@ -1,9 +1,7 @@
 name: Hello World
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
   build:
@@ -19,9 +17,14 @@ jobs:
 
       - name: Slack Notification - Success
         if: success()
+        run: echo "Success notification"
+
       - name: Print Hello World
         run: echo "Hello, World!"
+
       - name: Slack Notification - Failure
         if: failure()
+        run: echo "Failure notification"
+
       - name: Print Hello World
         run: echo "FAILED"
