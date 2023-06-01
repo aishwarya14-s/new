@@ -32,7 +32,7 @@ jobs:
         with:
           node-version: "16.14.2"
       - name: Install Serverless Framework
-        run: n install -g serverless
+        run: npm install -g serverless
 #       - name: Configuring AWS credentials using role based access
 #         uses: aws-actions/configure-aws-credentials@v1
 #         with:
