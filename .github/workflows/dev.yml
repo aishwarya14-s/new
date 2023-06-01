@@ -22,15 +22,15 @@ jobs:
         if: success()
         uses: rtCamp/action-slack-notify@v2
         with:
-          slack_webhook: ${{ secrets.SLACK_WEBHOOK }}
-          slack_message: "Success notification"
+          entryPoint: send
+          args: --webhook-url ${{ secrets.SLACK_WEBHOOK }} --message "Success notification"
 
       - name: Slack Notification - Failure
         if: failure()
         uses: rtCamp/action-slack-notify@v2
         with:
-          slack_webhook: ${{ secrets.SLACK_WEBHOOK }}
-          slack_message: "Failure notification"
+          entryPoint: send
+          args: --webhook-url ${{ secrets.SLACK_WEBHOOK }} --message "Failure notification"
 
       - name: Print Hello World
         run: echo "FAILED."
