@@ -33,18 +33,18 @@ jobs:
           node-version: "16.14.2"
       - name: Install Serverless Framework
         run: npm install -g serverless
-      - name: Configuring AWS credentials using role based access
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          role-to-assume: arn:aws:iam::378176467373:role/github-action-iam-role
-          role-duration-seconds: 1200
-          aws-region: us-east-1
+#       - name: Configuring AWS credentials using role based access
+#         uses: aws-actions/configure-aws-credentials@v1
+#         with:
+#           role-to-assume: arn:aws:iam::378176467373:role/github-action-iam-role
+#           role-duration-seconds: 1200
+#           aws-region: us-east-1
       - name: Install dependencies
         run: npm install --force
-      - name: Creating .env file
-        run: sh ./scripts/getEnvVars.sh us-east-1 development
-      - name: Deploy
-        run: sls deploy -s dev --region us-east-1
+#       - name: Creating .env file
+#         run: sh ./scripts/getEnvVars.sh us-east-1 development
+#       - name: Deploy
+#         run: sls deploy -s dev --region us-east-1
   slack_notification_end:
     name: Slack Notification
     needs:
