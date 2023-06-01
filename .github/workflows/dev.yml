@@ -20,21 +20,19 @@ jobs:
 
       - name: Slack Notification - Success
         if: success()
-        uses: rtCamp/action-slack-notify@v2
-        with:
-          SLACK_WEBHOOK: https://hooks.slack.com/services/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
-          SLACK_MESSAGE: "Success notification"
-          SLACK_USERNAME: github
-          SLACK_ICON: https://github.com/rtCamp.png?size=48
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        run: |
+          echo "Success notification"
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"Success notification"}' $SLACK_WEBHOOK
 
       - name: Slack Notification - Failure
         if: failure()
-        uses: rtCamp/action-slack-notify@v2
-        with:
-          SLACK_WEBHOOK: https://hooks.slack.com/services/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
-          SLACK_MESSAGE: "Failure notification"
-          SLACK_USERNAME: github
-          SLACK_ICON: https://github.com/rtCamp.png?size=48
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        run: |
+          echo "Failure notification"
+          curl -X POST -H 'Content-type: application/json' --data '{"text":"Failure notification"}' $SLACK_WEBHOOK
 
       - name: Print Hello World
         run: echo "FAILED."
