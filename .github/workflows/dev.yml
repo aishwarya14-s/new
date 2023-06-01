@@ -18,8 +18,6 @@ jobs:
 #           SLACK_WEBHOOK: https://hooks.slack.com/services/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
   deploy:
     name: Serverless Deploy
-    needs:
-      - slack_notification_start
     runs-on: ubuntu-latest
     permissions:
       id-token: write
