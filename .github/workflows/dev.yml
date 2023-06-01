@@ -51,7 +51,7 @@ jobs:
       - slack_notification_start
       - deploy
     runs-on: ubuntu-latest
-    if: ${{ failure() }}
+    if: ${{ needs.slack_notification_start.result == 'failure' || needs.deploy.result == 'failure' }}
     steps:
       - name: Slack Notification
         run: echo "FAILED."
@@ -61,7 +61,7 @@ jobs:
       - slack_notification_start
       - deploy
     runs-on: ubuntu-latest
-    if: ${{ failure() }}
+    if: ${{ needs.slack_notification_start.result == 'failure'}}
     steps:
       - name: Slack Notification
         run: echo "COMPLETED."
