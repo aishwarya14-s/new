@@ -27,4 +27,4 @@ jobs:
         run: echo "Failure notification"
 
       - name: Print Hello World
-        run: echo "FAILED"
+        run: echo "FAILED. "
