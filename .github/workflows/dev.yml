@@ -32,7 +32,7 @@ jobs:
         with:
           node-version: "16.14.2"
       - name: Install Serverless Framework
-        run: npm install -g serverless
+        run: n install -g serverless
 #       - name: Configuring AWS credentials using role based access
 #         uses: aws-actions/configure-aws-credentials@v1
 #         with:
@@ -51,10 +51,10 @@ jobs:
       - slack_notification_start
       - deploy
     runs-on: ubuntu-latest
-#     if: ${{ failure() }}
+    if: ${{ failure() }}
     steps:
       - name: Slack Notification
-        run: echo "SUCCESS."
+        run: echo "FAILED."
   slack_notification_SUCCESS:
     name: Slack Notification2
     needs:
